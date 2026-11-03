@@ -10,12 +10,13 @@ static const Block blocks[] = {
 	/* {"",	"sb-price xmr-btc \"Monero to Bitcoin\" 🔒 25",	9000,	25}, */
 	/* {"",	"sb-price xmr Monero 🔒 24",			9000,	24}, */
 	/* {"",	"sb-price eth Ethereum 🍸 23",			9000,	23}, */
-	/* {"",	"sb-price btc Bitcoin 💰 21",			9000,	21}, */
+//	/* {"",	"sb-price btc Bitcoin 💰 21",			9000,	21}, */
+ {"", 	"sb-tun", 	5,	4},
 //	{"",	"sb-torrent",	20,	7},
-	 {"",	"sb-memory",	10,	14},
+ {"",	"sb-memory",	10,	14},
 	/* {"",	"sb-cpu",		10,	18}, */
 	/* {"",	"sb-moonphase",	18000,	17}, */
-//	{"",	"sb-doppler",	0,	13},
+// 	 {"",	"sb-doppler",	0,	13},
 //	{"",	"sb-forecast",	18000,	5},
 ///	{"",	"sb-mailbox",	180,	12},
 //	{"",	"sb-nettraf",	1,	16},

@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "st"
-#define TERMCLASS "St"
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
 #define BROWSER "librewolf"
 
 /* appearance */
@@ -23,6 +23,11 @@ static char normfgcolor[]           = "#47E60B";
 static char selfgcolor[]            = "#F33878";
 static char selbordercolor[]        = "#700000";
 static char selbgcolor[]            = "#100009";
+
+/* #FFFFFF #100009 #eeeeee #300009 #000000 #00ffff*/
+/* #100009 #000001 #47E60B #F33878 #700000 #100009 */
+// #F1A1DA
+
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -159,24 +164,14 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,  spawn,                  {.v = (const char*[]){ "sysact", NULL } } },
 	{ MODKEY|ShiftMask,		XK_BackSpace,  spawn,                  {.v = (const char*[]){ "sysact", NULL } } },
 
+	// Schlop's Hotkeys
+	{ MODKEY,		XK_c,          spawn,                  	       {.v = (const char*[]){ "obsidian-spawn", NULL } } },
+	{ MODKEY,		XK_v,          spawn,                  	       {.v = (const char*[]){ "virt-manager", NULL } } },
 
-	// USER DEFINITIONS
-	#define VM "virtualbox"
-	#define SLOCK "slock"
-	#define NOTES "obsidian"
-	// USER MODKEY
+	// { MODKEY,		XK_d,          spawn,                  	       {.v = (const char*[]){ "discord", NULL } } },
+	{ MODKEY,		XK_n,          spawn,                  	       {.v = (const char*[]){ "anki", NULL } } },
 
-/*	 Example of browser spawn function. XK is the key, spawn is the action,
-	{.v =(const char[]){ BROWSER, NULL } } } is the name of the application we are trying to spawn, we use #define to shortern the application name / generalize it.
-        ------------------------------------------------------------------------------------------------------------------
-	{ MODKEY,			XK_w,          spawn,                  {.v = (const char*[]){ BROWSER, NULL } } },
-*/
-
-	{ MODKEY, 			XK_v,		spawn,			{.v = (const char*[]){ VM, NULL } } },
-        { MODKEY, 			XK_s,		spawn,			{.v = (const char*[]){ SLOCK, NULL } } },
-        { MODKEY, 			XK_c,		spawn,			{.v = (const char*[]){ NOTES, NULL } } },
-
-
+//	{ MODKEY,		XK_s,          spawn,                  	       {.v = (const char*[]){ "slock", NULL } } },
 
 	{ MODKEY,			XK_Tab,        view,                   {0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,	       spawn,                  SHCMD("") }, */
@@ -184,7 +179,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_q,          spawn,                  {.v = (const char*[]){ "sysact", NULL } } },
 	{ MODKEY,			XK_w,          spawn,                  {.v = (const char*[]){ BROWSER, NULL } } },
 	{ MODKEY|ShiftMask,		XK_w,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
-	{ MODKEY,			XK_e,          spawn,                  SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook 2>/dev/null") },
+// 	{ MODKEY,			XK_e,          spawn,                  SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook 2>/dev/null") },
+	{ MODKEY,			XK_e,          spawn,                  {.v = (const char*[]){ "waterfox" , NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,          spawn,                  SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
@@ -232,12 +228,12 @@ static const Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_z,          spawn,                  SHCMD("") }, */
 	{ MODKEY,			XK_x,          incrgaps,               {.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,          spawn,                  SHCMD("") }, */
-	{ MODKEY,			XK_c,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
+        /* { MODKEY,			XK_c,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } }, */
 	/* { MODKEY|ShiftMask,		XK_c,          spawn,                  SHCMD("") }, */
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,          togglebar,              {0} },
 	/* { MODKEY|ShiftMask,		XK_b,          spawn,                  SHCMD("") }, */
-	{ MODKEY,			XK_n,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
+//	{ MODKEY,			XK_n,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,          spawn,                  SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY,			XK_m,          spawn,                  {.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,          spawn,                  SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
@@ -272,10 +268,14 @@ static const Key keys[] = {
 	{ MODKEY,			XK_space,      zoom,                   {0} },
 	{ MODKEY|ShiftMask,		XK_space,      togglefloating,         {0} },
 
-	{ 0,				XK_Print,      spawn,                  SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-	{ ShiftMask,			XK_Print,      spawn,                  {.v = (const char*[]){ "maimpick", NULL } } },
+	// Screen shotting
+	{ MODKEY|ShiftMask,		XK_Print,      spawn,                  SHCMD("maim ~/Pictures/screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+
+	{ ShiftMask,			XK_Print,      spawn,                  {.v = (const char*[]){ "flameshot-gui", NULL } } },
+
+
 	{ MODKEY,			XK_Print,      spawn,		       {.v = (const char*[]){ "dmenurecord", NULL } } },
-	{ MODKEY|ShiftMask,		XK_Print,      spawn,                  {.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
+	{ MODKEY|ShiftMask,		XK_Delete,     spawn,                  {.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Delete,     spawn,                  {.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Scroll_Lock, spawn,                 SHCMD("killall screenkey || screenkey &") },
 
